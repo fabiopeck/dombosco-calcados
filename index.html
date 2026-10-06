@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dom Bosco Calçados | Loja Online</title>
+  <meta name="description" content="Dom Bosco Calçados - sapatos, sandálias, tênis e botas com estilo e conforto.">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/favicon-32.png?v=2" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="/static/store.css?v=94">
+</head>
+<body>
+  <div class="site-chrome">
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Dom Bosco Calçados">
+      <img src="/assets/logo-header.png?v=2" alt="Dom Bosco Calçados">
+    </a>
+    <form class="header-search" action="#novidades" method="get" role="search">
+      <label class="sr-only" for="header-q">Buscar produtos</label>
+      <input id="header-q" type="search" name="busca" placeholder="O que você está buscando?" autocomplete="off">
+      <button type="submit" aria-label="Buscar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      </button>
+    </form>
+    <div class="nav-right">
+      <a class="header-action" href="#novidades">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 20.5s-7.2-4.4-7.2-10A4.2 4.2 0 0 1 12 7.1 4.2 4.2 0 0 1 19.2 10.5c0 5.6-7.2 10-7.2 10z"/>
+        </svg>
+        <span>Novidades</span>
+      </a>
+      <a class="header-action" href="#mapa">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 10.5L12 4l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5z"/></svg>
+        <span>Lojas físicas</span>
+      </a>
+      <a class="header-action" href="#conta">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 19.5c1.8-3.2 4.2-4.8 7-4.8s5.2 1.6 7 4.8"/></svg>
+        <span>Entrar</span>
+      </a>
+      <button class="icon-btn menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobile-nav" hidden>
+    <a href="#marcas">Marcas</a>
+    <a href="#colecoes">Esportes</a>
+    <a href="#novidades">Lançamentos</a>
+    <a href="#colecoes">Feminino</a>
+    <a href="#colecoes">Masculino</a>
+    <a href="#colecoes">Infantil</a>
+    <a href="#colecoes">Acessórios</a>
+    <a href="#mapa">Lojas físicas</a>
+    <a href="#favoritos" id="favoritos">Lista de desejos</a>
+  </nav>
+
+  <section class="hero hero-video-section" id="hero" aria-label="Dom Bosco Calçados">
+    <div class="hero-video-wrap" aria-hidden="true">
+      <video class="hero-video" autoplay muted loop playsinline poster="/assets/hero-video/hero-poster.jpg?v=2">
+        <source src="/assets/hero-video/hero-comercial.mp4?v=2" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-veil"></div>
+    <div class="hero-content">
+      <img class="hero-logo" src="/assets/logo-header.png?v=2" alt="Dom Bosco Calçados">
+      <p class="hero-lead">Estilo e conforto para o seu dia a dia.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#novidades">Ver novidades</a>
+        <a class="btn btn-line" href="#novidades">Lançamentos</a>
+      </div>
+    </div>
+  </section>
+
+  <aside class="float-video is-hidden" id="float-video" hidden aria-hidden="true" aria-label="Campanha Dom Bosco"></aside>
+
+  <section class="colecoes" id="colecoes" aria-label="Coleções e numeração">
+    <div class="section-head">
+      <h2>Coleções e numeração</h2>
+      <p class="section-sub">Escolha a categoria ou o seu tamanho</p>
+    </div>
+    <div class="size-row" role="group" aria-label="Numeração">
+      <button type="button" class="size-wide">19 a 32</button>
+      <button type="button">33</button>
+      <button type="button">34</button>
+      <button type="button">35</button>
+      <button type="button">36</button>
+      <button type="button">37</button>
+      <button type="button">38</button>
+      <button type="button">39</button>
+      <button type="button">40</button>
+      <button type="button">41</button>
+      <button type="button">42</button>
+      <button type="button">43</button>
+      <button type="button">44</button>
+      <button type="button" class="size-wide">45 a 48</button>
+    </div>
+    <div class="categories rail-section colecoes-cats">
+      <div class="section-head rail-head">
+        <h3>Compre por categoria</h3>
+        <div class="rail-controls">
+          <button type="button" class="rail-btn" data-rail="cat-rail" data-dir="-1" aria-label="Anterior">‹</button>
+          <button type="button" class="rail-btn" data-rail="cat-rail" data-dir="1" aria-label="Próximo">›</button>
+        </div>
+      </div>
+      <div class="rail" id="cat-rail" tabindex="0">
+        <a class="cat rail-card" href="#novidades"><img src="/assets/products/cat-rasteiras.png" alt="Rasteiras"><span>Rasteiras</span></a>
+        <a class="cat rail-card" href="#novidades"><img src="/assets/products/cat-sandalias.png" alt="Sandálias"><span>Sandálias</span></a>
+        <a class="cat rail-card" href="#novidades"><img src="/assets/products/cat-tenis.png" alt="Tênis"><span>Tênis</span></a>
+        <a class="cat rail-card" href="#novidades"><img src="/assets/products/cat-botas.jpg" alt="Botas"><span>Botas</span></a>
+        <a class="cat rail-card" href="#novidades"><img src="/assets/products/cat-scarpins.png" alt="Scarpins"><span>Scarpins</span></a>
+        <a class="cat rail-card" href="#novidades"><img src="/assets/products/cat-mocassins.png" alt="Mocassins"><span>Mocassins</span></a>
+        <a class="cat rail-card" href="#novidades"><img src="/assets/products/cat-plataformas.png" alt="Plataformas"><span>Plataformas</span></a>
+        <a class="cat rail-card" href="#novidades"><img src="/assets/products/cat-bolsas.png" alt="Acessórios"><span>Acessórios</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="products rail-section" id="novidades">
+    <div class="section-head rail-head">
+      <h2>Novidades</h2>
+      <div class="rail-controls">
+        <button type="button" class="rail-btn" data-rail="feat-rail" data-dir="-1" aria-label="Anterior">‹</button>
+        <button type="button" class="rail-btn" data-rail="feat-rail" data-dir="1" aria-label="Próximo">›</button>
+      </div>
+    </div>
+    <div class="rail rail-products" id="feat-rail" tabindex="0">
+      <article class="product rail-card">
+        <a href="#">
+          <div class="product-media"><img src="/assets/products/destaque-4794.jpg" alt="Destaque Dom Bosco"></div>
+          <h3>Destaque Dom Bosco</h3>
+        </a>
+        <button type="button" class="add-bag">Comprar</button>
+      </article>
+      <article class="product rail-card">
+        <a href="#">
+          <div class="product-media"><img src="/assets/products/destaque-4795.jpg" alt="Destaque Dom Bosco"></div>
+          <h3>Destaque Dom Bosco</h3>
+        </a>
+        <button type="button" class="add-bag">Comprar</button>
+      </article>
+      <article class="product rail-card">
+        <a href="#">
+          <div class="product-media"><img src="/assets/products/destaque-4796.jpg" alt="Destaque Dom Bosco"></div>
+          <h3>Destaque Dom Bosco</h3>
+        </a>
+        <button type="button" class="add-bag">Comprar</button>
+      </article>
+      <article class="product rail-card" id="liquida">
+        <a href="#">
+          <div class="product-media"><img src="/assets/products/destaque-4797.jpg" alt="Destaque Dom Bosco"></div>
+          <h3>Destaque Dom Bosco</h3>
+        </a>
+        <button type="button" class="add-bag">Comprar</button>
+      </article>
+      <article class="product rail-card">
+        <a href="#">
+          <div class="product-media"><img src="/assets/products/destaque-4798.jpg" alt="Destaque Dom Bosco"></div>
+          <h3>Destaque Dom Bosco</h3>
+        </a>
+        <button type="button" class="add-bag">Comprar</button>
+      </article>
+      <article class="product rail-card">
+        <a href="#">
+          <div class="product-media"><img src="/assets/products/prod-bota.jpg" alt="Bota Cano Médio Pegada"></div>
+          <h3>Bota Cano Médio Pegada em Couro Feminina</h3>
+        </a>
+        <button type="button" class="add-bag">Comprar</button>
+      </article>
+      <article class="product rail-card">
+        <a href="#">
+          <div class="product-media"><img src="/assets/products/prod-01.jpg" alt="Bota Cano Baixo Bottero"></div>
+          <h3>Bota Cano Baixo Bottero em Couro Salto Bloco Feminina</h3>
+        </a>
+        <button type="button" class="add-bag">Comprar</button>
+      </article>
+      <article class="product rail-card">
+        <a href="#">
+          <div class="product-media"><img src="/assets/products/prod-02.jpg" alt="Bota Cano Curto Pegada"></div>
+          <h3>Bota Cano Curto Pegada em Couro Calce Fácil Feminina</h3>
+        </a>
+        <button type="button" class="add-bag">Comprar</button>
+      </article>
+      <article class="product rail-card">
+        <a href="#">
+          <div class="product-media"><img src="/assets/products/prod-03.jpg" alt="Bota Cano Longo Over Vizzano"></div>
+          <h3>Bota Cano Longo Over Vizzano Feminina</h3>
+        </a>
+        <button type="button" class="add-bag">Comprar</button>
+      </article>
+      <article class="product rail-card">
+        <a href="#">
+          <div class="product-media"><img src="/assets/products/prod-04.jpg" alt="Bota Cano Médio Vizzano Country"></div>
+          <h3>Bota Cano Médio Vizzano Country Texana Feminina</h3>
+        </a>
+        <button type="button" class="add-bag">Comprar</button>
+      </article>
+      <article class="product rail-card">
+        <a href="#">
+          <div class="product-media"><img src="/assets/products/prod-tenis-1.jpg" alt="Tênis Dom Bosco"></div>
+          <h3>Tênis Casual Dom Bosco Feminino</h3>
+        </a>
+        <button type="button" class="add-bag">Comprar</button>
+      </article>
+    </div>
+  </section>
+
+  <section class="brands rail-section" id="marcas">
+    <div class="section-head rail-head">
+      <h2>Marcas</h2>
+      <div class="rail-controls">
+        <button type="button" class="rail-btn" data-rail="brand-rail" data-dir="-1" aria-label="Anterior">‹</button>
+        <button type="button" class="rail-btn" data-rail="brand-rail" data-dir="1" aria-label="Próximo">›</button>
+      </div>
+    </div>
+    <div class="rail rail-brands" id="brand-rail" tabindex="0">
+      <a class="brand-card rail-card" href="#colecoes"><img src="/assets/products/sap-01.png" alt="Beira Rio"><span>Beira Rio</span></a>
+      <a class="brand-card rail-card" href="#colecoes"><img src="/assets/products/sap-02.png" alt="Dakota"><span>Dakota</span></a>
+      <a class="brand-card rail-card" href="#colecoes"><img src="/assets/products/sap-03.png" alt="Modare"><span>Modare</span></a>
+      <a class="brand-card rail-card" href="#colecoes"><img src="/assets/products/sap-04.png" alt="Moleca"><span>Moleca</span></a>
+      <a class="brand-card rail-card" href="#colecoes"><img src="/assets/products/sap-05.png" alt="Vizzano"><span>Vizzano</span></a>
+      <a class="brand-card rail-card" href="#colecoes"><img src="/assets/products/sap-06.png" alt="Pegada"><span>Pegada</span></a>
+      <a class="brand-card rail-card" href="#colecoes"><img src="/assets/products/sap-07.jpg" alt="Olympikus"><span>Olympikus</span></a>
+      <a class="brand-card rail-card" href="#colecoes"><img src="/assets/products/prod-tenis-2.jpg" alt="Mizuno"><span>Mizuno</span></a>
+      <a class="brand-card rail-card" href="#colecoes"><img src="/assets/products/prod-tenis-3.jpg" alt="Ramarim"><span>Ramarim</span></a>
+      <a class="brand-card rail-card" href="#colecoes"><img src="/assets/products/prod-tenis-4.jpg" alt="Via Marte"><span>Via Marte</span></a>
+      <a class="brand-card rail-card" href="#colecoes"><img src="/assets/instagram/loja-adidas.jpg" alt="Adidas"><span>Adidas</span></a>
+      <a class="brand-card rail-card" href="#colecoes"><img src="/assets/products/prod-sandalia.jpg" alt="Molekinha"><span>Molekinha</span></a>
+    </div>
+    <div class="perk-strip marcas-perks" aria-label="Vantagens Dom Bosco">
+      <div class="perk">
+        <span class="perk-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 28h28v-10H4v10zm28 0h8l6 6v4h-4"/><circle cx="12" cy="36" r="3.5"/><circle cx="34" cy="36" r="3.5"/><path d="M8 18V12h16"/></svg>
+        </span>
+        <div>
+          <strong>Envio ULTRA RÁPIDO</strong> e <strong>FRETE GRÁTIS</strong>
+          <span>para região Sudeste acima de R$&nbsp;399,90</span>
+        </div>
+      </div>
+      <div class="perk">
+        <span class="perk-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="8" y="14" width="32" height="22" rx="3"/><path d="M8 22h32M16 30h8"/></svg>
+        </span>
+        <div>
+          <strong>Parcelamento</strong>
+          <span>em até <strong>10x s/ juros</strong></span>
+        </div>
+      </div>
+      <div class="perk">
+        <span class="perk-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="24" r="14"/><path d="M18 24h12M24 18v12"/></svg>
+        </span>
+        <div>
+          Pague com <strong>PIX</strong> e ganhe
+          <span><strong>5% de desconto</strong></span>
+        </div>
+      </div>
+      <div class="perk">
+        <span class="perk-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 8l4 10h10l-8 6 3 10-9-6-9 6 3-10-8-6h10z"/></svg>
+        </span>
+        <div>
+          Atendimento <strong>humanizado</strong>
+          <span>Produtos <strong>originais</strong></span>
+        </div>
+      </div>
+      <div class="perk">
+        <span class="perk-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 20h20v18H14z"/><path d="M18 20c0-4 2.5-8 6-8s6 4 6 8"/><path d="M14 28h20"/></svg>
+        </span>
+        <div>
+          <strong>Ganhe cupom de desconto</strong>
+          <span>para a primeira compra <strong>5% off</strong></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </section>
+
+  <section class="shopper-scene" id="experiencia" aria-label="Experiência de compra Dom Bosco">
+    <div class="shopper-scene-bg" aria-hidden="true">
+      <span class="shopper-orb shopper-orb-a"></span>
+      <span class="shopper-orb shopper-orb-b"></span>
+      <span class="shopper-orb shopper-orb-c"></span>
+      <span class="shopper-shine"></span>
+    </div>
+    <div class="shopper-scene-inner">
+      <div class="shopper-copy">
+        <p class="shopper-eyebrow">Momento Dom Bosco</p>
+        <h2>Saindo da loja com as sacolas cheias de estilo</h2>
+        <p>
+          Aquela sensação boa de escolher o par certo, ser bem atendida e levar
+          para casa o conforto Dom Bosco. Compra leve, atendimento humano e
+          o sorriso de quem encontrou o calçado ideal.
+        </p>
+        <div class="shopper-actions">
+          <a class="btn btn-primary" href="#novidades">Ver novidades</a>
+          <a class="btn btn-ghost-dark" href="#mapa">Visitar as lojas</a>
+        </div>
+      </div>
+      <figure class="shopper-figure">
+        <img
+          src="/assets/hero-dombosco.webp?v=1"
+          alt="Cliente Dom Bosco Calçados sorrindo no momento da compra"
+          width="918"
+          height="1026"
+          loading="lazy"
+          decoding="async"
+        >
+      </figure>
+    </div>
+  </section>
+
+  <section class="map-section map-fullbleed" id="mapa" aria-label="Lojas e mapa">
+    <div class="map-section-head">
+      <div class="section-head">
+        <h2>Nossas lojas</h2>
+        <p class="section-sub">3 unidades em Lavras/MG. Encontre a Dom Bosco mais perto de você.</p>
+      </div>
+      <ul class="store-list store-list-compact">
+        <li>
+          <button type="button" class="store-item is-active" data-lat="-21.2506973" data-lng="-45.0036051">
+            <strong>Loja Melo Viana</strong>
+            <span>Rua Doutor Melo Viana, 39 - Centro, Lavras/MG</span>
+          </button>
+          <a class="store-route" href="https://www.google.com/maps/dir/?api=1&destination=Rua+Doutor+Melo+Viana,+39,+Centro,+Lavras,+MG" target="_blank" rel="noopener">Como chegar</a>
+        </li>
+        <li>
+          <button type="button" class="store-item" data-lat="-21.2452000" data-lng="-45.0004000">
+            <strong>Loja Francisco Sales</strong>
+            <span>Rua Doutor Francisco Sales, 358 - Centro, Lavras/MG</span>
+          </button>
+          <a class="store-route" href="https://www.google.com/maps/dir/?api=1&destination=Rua+Doutor+Francisco+Sales,+358,+Centro,+Lavras,+MG" target="_blank" rel="noopener">Como chegar</a>
+        </li>
+        <li>
+          <button type="button" class="store-item" data-lat="-21.2499435" data-lng="-45.0035936">
+            <strong>Loja Francisco Salles</strong>
+            <span>Rua Doutor Francisco Salles - Centro, Lavras/MG</span>
+          </button>
+          <a class="store-route" href="https://www.google.com/maps/dir/?api=1&destination=Rua+Doutor+Francisco+Salles,+Centro,+Lavras,+MG" target="_blank" rel="noopener">Como chegar</a>
+        </li>
+      </ul>
+    </div>
+    <div class="map-section-wrap">
+      <div id="stores-map" role="region" aria-label="Mapa das lojas Dom Bosco"></div>
+    </div>
+  </section>
+
+  <section class="about" id="sobre">
+    <h2>Sobre a Dom Bosco</h2>
+    <p class="about-quote"><em>“Um sonho aos seus pés”</em></p>
+    <p>
+      Oi, a gente já se conhece? Muito prazer, Dom Bosco Calçados!
+      Somos uma loja de moda que oferece sapatos e acessórios feitos para te encantar.
+      Aqui tem atenção de verdade, produtos com o seu jeito e ritmo.
+      Chega mais, fique à vontade. Queremos ver você confortável e livre para ser como quiser.
+    </p>
+  </section>
+
+  <footer class="site-footer mega-footer">
+    <div class="footer-top mega-footer-main">
+      <div class="footer-brand">
+        <img class="footer-logo" src="/assets/logo-header.png?v=2" alt="Dom Bosco Calçados" width="220" height="143">
+        <p>“Um sonho aos seus pés.” Especialista em estilo e conforto, com atendimento de excelência e unidades em Lavras/MG.</p>
+        <div class="footer-social" aria-label="Redes sociais">
+          <a
+            class="footer-social-btn is-instagram"
+            href="https://www.instagram.com/domboscocalcados/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram Dom Bosco Calçados"
+            title="Instagram"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.5 1 .4.4.7.9 1 1.5.2.4.4 1.1.4 2.3.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-1 1.5-.4.4-.9.7-1.5 1-.4.2-1.1.4-2.3.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.5-1-.4-.4-.7-.9-1-1.5-.2-.4-.4-1.1-.4-2.3C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.3.2-.6.5-1 1-1.5.4-.4.9-.7 1.5-1 .4-.2 1.1-.4 2.3-.4C8.4 2.2 8.8 2.2 12 2.2m0 1.8c-3.2 0-3.5 0-4.8.1-1 .1-1.6.2-2 .4-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.2.4-.3 1-.4 2-.1 1.2-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1 .2 1.6.4 2 .2.5.4.8.7 1.1.3.3.6.5 1.1.7.4.2 1 .3 2 .4 1.2.1 1.6.1 4.8.1s3.5 0 4.8-.1c1-.1 1.6-.2 2-.4.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.2-.4.3-1 .4-2 .1-1.2.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1-.2-1.6-.4-2-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.4-.2-1-.3-2-.4-1.3-.1-1.6-.1-4.8-.1zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 8.1a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zm5.1-8.4a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z"/>
+            </svg>
+          </a>
+          <a
+            class="footer-social-btn is-facebook"
+            href="https://www.facebook.com/domboscocalcados"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook Dom Bosco Calçados"
+            title="Facebook"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M13.5 22v-8.1h2.7l.4-3.2h-3.1V8.7c0-.9.3-1.6 1.6-1.6h1.7V4.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.6v3.2h2.5V22h3.4z"/>
+            </svg>
+          </a>
+          <a
+            class="footer-social-btn is-whatsapp"
+            href="https://wa.me/5535988985651"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp Dom Bosco Calçados"
+            title="WhatsApp"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.86 9.86 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.76 14.09c-.24.68-1.41 1.26-1.97 1.34-.51.07-1.14.1-1.84-.12-.42-.13-.97-.31-1.67-.61-2.94-1.27-4.85-4.23-5-4.43-.14-.2-1.22-1.62-1.22-3.1 0-1.47.76-2.2 1.05-2.5.24-.24.64-.36 1.02-.36h.3c.29 0 .44.02.63.49.24.57.8 1.96.87 2.1.07.15.12.32.02.52-.1.2-.15.32-.29.49-.14.17-.3.31-.44.47-.14.15-.3.31-.13.6.17.29.76 1.25 1.63 2.02 1.12 1 2.04 1.32 2.36 1.47.32.15.5.12.69-.07.19-.2.81-.94 1.02-1.26.22-.32.44-.26.73-.15.29.12 1.86.87 2.18 1.03.32.16.53.24.61.38.08.14.08.83-.16 1.51z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h3>Comprar</h3>
+        <a href="#experiencia">Experiência</a>
+        <a href="#colecoes">Categorias</a>
+        <a href="#novidades">Novidades</a>
+        <a href="#liquida">Ofertas</a>
+        <a href="#marcas">Marcas</a>
+        <a href="#favoritos">Lista de desejos</a>
+      </div>
+
+      <div>
+        <h3>Institucional</h3>
+        <a href="#sobre">Sobre a empresa</a>
+        <a href="#mapa">Lojas físicas</a>
+        <a href="#mapa">Mapa</a>
+        <a href="#">Trocas e devoluções</a>
+        <a href="/privacidade.html">Política de privacidade</a>
+      </div>
+
+      <div>
+        <h3>Atendimento</h3>
+        <a href="#mapa">Fale conosco na loja</a>
+        <a href="#">Dúvidas frequentes</a>
+      </div>
+
+      <div class="footer-newsletter">
+        <h3>Receba ofertas</h3>
+        <p>Cadastre-se e ganhe cupom na primeira compra.</p>
+        <form class="newsletter" action="#" method="get">
+          <label class="sr-only" for="email">Seu e-mail</label>
+          <input id="email" type="email" name="email" placeholder="Seu e-mail" required autocomplete="email">
+          <button type="submit" class="btn btn-primary">Quero o cupom</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-benefits">
+      <div class="footer-benefit">
+        <strong>Envio rápido</strong>
+        <span>Frete grátis a partir de R$&nbsp;399,90</span>
+      </div>
+      <div class="footer-benefit">
+        <strong>Parcelamento</strong>
+        <span>Em até 6x sem juros</span>
+      </div>
+      <div class="footer-benefit">
+        <strong>Pix</strong>
+        <span>10% off na primeira compra</span>
+      </div>
+      <div class="footer-benefit">
+        <strong>Atendimento</strong>
+        <span>Humanizado nas lojas e WhatsApp</span>
+      </div>
+    </div>
+
+    <div class="footer-payments" aria-label="Formas de pagamento">
+      <div class="footer-payments-left">
+        <span>Formas de pagamento</span>
+        <ul class="footer-pay-list">
+          <li><img src="/assets/payments/visa.png" alt="Visa" width="58" height="34" loading="lazy" decoding="async"></li>
+          <li><img src="/assets/payments/mastercard.png" alt="Mastercard" width="58" height="34" loading="lazy" decoding="async"></li>
+          <li><img src="/assets/payments/pix.png" alt="PIX" width="58" height="34" loading="lazy" decoding="async"></li>
+          <li><img src="/assets/payments/boleto.png" alt="Boleto" width="58" height="34" loading="lazy" decoding="async"></li>
+        </ul>
+        <p class="copyright">
+          © 2026 Dom Bosco Calçados. Todos os direitos reservados.
+          <span class="copyright-desk"><br>Lavras/MG.<br>CNPJ 50.221.587/0001-37</span>
+          <span class="copyright-mob"><br>CNPJ 50.221.587/0001-37 · Lavras/MG</span>
+        </p>
+      </div>
+      <p class="footer-dev">
+        Desenvolvido por
+        <a href="https://www.theorizon.com.br" target="_blank" rel="noopener noreferrer" aria-label="The Orizon">
+          <img src="/assets/0b09c67e-5817-43ee-a0b8-9bdae792aca8.png?v=3" alt="The Orizon" width="220" height="49">
+        </a>
+      </p>
+    </div>
+
+    <div class="footer-legal">
+      <a href="/privacidade.html">Privacidade</a>
+      <a href="/termos.html">Termos</a>
+      <a href="/acessibilidade.html">Acessibilidade</a>
+      <a href="#hero">Voltar ao topo</a>
+    </div>
+  </footer>
+
+  <div class="cart-overlay" id="cart-overlay" hidden></div>
+  <aside class="cart-drawer" id="cart-drawer" hidden aria-labelledby="cart-title" role="dialog" aria-modal="true">
+    <div class="cart-drawer-head">
+      <h2 id="cart-title">Sacolinha</h2>
+      <button type="button" class="cart-close" id="close-cart" aria-label="Fechar sacolinha">×</button>
+    </div>
+    <div class="cart-drawer-body" id="cart-items">
+      <p class="cart-empty">Sua sacolinha está vazia. Escolha um produto e toque em Comprar.</p>
+    </div>
+    <div class="cart-drawer-foot">
+      <p class="cart-foot-note">Organize os itens e envie o pedido pelo WhatsApp.</p>
+      <a
+        class="cart-wa-btn"
+        id="cart-wa-btn"
+        href="https://wa.me/5535988985651?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Dom%20Bosco%20Cal%C3%A7ados."
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Enviar pedido no WhatsApp
+      </a>
+    </div>
+  </aside>
+
+  <a
+    class="wa-float"
+    id="wa-float"
+    href="https://wa.me/5535988985651?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Dom%20Bosco%20Cal%C3%A7ados."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="WhatsApp da loja (35) 98898-5651"
+  >
+    <span class="wa-float-pulse" aria-hidden="true"></span>
+    <span class="wa-float-pulse wa-float-pulse-delay" aria-hidden="true"></span>
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.17 1.62 5.98L4 29l8.16-1.58a12 12 0 0 0 5.88 1.5h.01C22.68 28.92 28 23.52 28 16.88 28 10.24 22.68 3 16.04 3zm7.03 17.2c-.3.84-1.74 1.55-2.43 1.65-.62.09-1.4.13-2.26-.14-.52-.16-1.19-.39-2.05-.76-3.61-1.56-5.96-5.2-6.14-5.44-.18-.24-1.5-2-1.5-3.82s.93-2.7 1.29-3.07c.3-.3.79-.45 1.26-.45h.36c.36 0 .54.03.78.6.3.7.98 2.4 1.07 2.58.09.18.15.4.03.64-.12.24-.18.39-.35.6-.18.21-.36.38-.54.58-.18.18-.37.38-.16.74.21.36.93 1.53 2 2.48 1.38 1.22 2.5 1.62 2.9 1.8.39.18.62.15.85-.09.24-.24.99-1.15 1.26-1.54.27-.39.54-.32.9-.18.36.15 2.28 1.07 2.67 1.27.39.2.65.3.75.46.09.18.09 1.02-.21 1.86z"/>
+    </svg>
+  </a>
+
+  <div class="cookie-bar" id="cookie-bar" hidden>
+    <div class="cookie-bar-inner">
+      <div class="cookie-msg">
+        <span class="cookie-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="40" height="40" fill="none">
+            <circle cx="24" cy="24" r="20" fill="#D4A574"/>
+            <circle cx="24" cy="24" r="20" fill="none" stroke="#B8864E" stroke-width="1.5"/>
+            <circle cx="15" cy="18" r="2.2" fill="#5C3A1E"/>
+            <circle cx="24" cy="14" r="1.8" fill="#5C3A1E"/>
+            <circle cx="32" cy="19" r="2.4" fill="#5C3A1E"/>
+            <circle cx="18" cy="28" r="2" fill="#5C3A1E"/>
+            <circle cx="28" cy="30" r="2.6" fill="#5C3A1E"/>
+            <circle cx="22" cy="36" r="1.7" fill="#5C3A1E"/>
+            <circle cx="33" cy="27" r="1.5" fill="#5C3A1E"/>
+          </svg>
+        </span>
+        <p>
+          Utilizamos cookies para personalizar anúncios e melhorar a sua experiência no site.
+          Ao continuar navegando, você concorda com a nossa
+          <a href="/privacidade.html">Política de Privacidade</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="cookie-btn cookie-btn-primary" data-cookie-choice="accept">Aceitar</button>
+        <button type="button" class="cookie-btn cookie-btn-ghost" data-cookie-choice="refuse">Recusar</button>
+        <button type="button" class="cookie-btn cookie-btn-outline" data-cookie-choice="configure">Configurar cookies</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cookie-toast" id="cookie-toast" hidden role="status" aria-live="polite">
+    <strong>Cookies salvos</strong>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="/static/store.js?v=27" defer></script>
+</body>
+</html>
